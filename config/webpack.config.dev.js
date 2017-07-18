@@ -50,9 +50,9 @@ module.exports = {
     require.resolve('react-error-overlay'),
     // Finally, this is your app's code:
     paths.appIndexJs,
-    // We include the app code last so that if there is a runtime error during
-    // initialization, it doesn't blow up the WebpackDevServer client, and
-    // changing JS code would still trigger a refresh.
+  // We include the app code last so that if there is a runtime error during
+  // initialization, it doesn't blow up the WebpackDevServer client, and
+  // changing JS code would still trigger a refresh.
   ],
   output: {
     // Next line is not used in dev but WebpackDevServer crashes without it:
@@ -68,8 +68,7 @@ module.exports = {
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath,
     // Point sourcemap entries to original disk location (format as URL on Windows)
-    devtoolModuleFilenameTemplate: info =>
-      path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
+    devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -88,7 +87,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -118,7 +117,7 @@ module.exports = {
           {
             options: {
               formatter: eslintFormatter,
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -144,6 +143,7 @@ module.exports = {
           /\.gif$/,
           /\.jpe?g$/,
           /\.png$/,
+          /\.scss$/
         ],
         loader: require.resolve('file-loader'),
         options: {
@@ -167,7 +167,7 @@ module.exports = {
         include: paths.appSrc,
         loader: require.resolve('babel-loader'),
         options: {
-          
+
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
@@ -210,9 +210,12 @@ module.exports = {
             },
           },
         ],
-      },
-      // ** STOP ** Are you adding a new loader?
-      // Remember to add the new extension(s) to the "file" loader exclusion list.
+      }, {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
+      }
+    // ** STOP ** Are you adding a new loader?
+    // Remember to add the new extension(s) to the "file" loader exclusion list.
     ],
   },
   plugins: [
