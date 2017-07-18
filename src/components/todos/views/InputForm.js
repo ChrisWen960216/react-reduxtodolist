@@ -2,6 +2,7 @@
  * 表单组件 
  */
 import React, { Component } from 'react';
+import { Input } from 'antd';
 
 export default class InputForm extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ export default class InputForm extends Component {
 
     render() {
         return ( <div className='input-line'>
-                   <input type="text" onKeyPress={ this.onPress } />
+                   <Input type="text" onKeyPress={ this.onPress } />
                  </div>
         )
     }

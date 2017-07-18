@@ -28,9 +28,9 @@ class TodoComponents extends Component {
     onPress(e) {
         let text = e.target.value.trim();
         if (e.key === 'Enter') {
-            this.props.addTodo(text)
+            this.props.addTodo(text);
+            e.target.value = '';
         }
-
     }
 
     render() {
@@ -43,14 +43,14 @@ class TodoComponents extends Component {
     }
 }
 
-//将对应的redux state 转换成组件的 props 以供使用
+//将对应的redux state 转换成组件的 props 以供使用 mapStateToProps
 function updateState(state) {
     return {
         newState: state
     }
 }
 
-//分发事件，让 reducer 进行对应的事件处理
+//分发事件，让 reducer 进行对应的事件处理 mapDispatchToProps
 function updateStates(dispatch) {
     return {
         addTodo: (text) => dispatch(addTodo(text)),
