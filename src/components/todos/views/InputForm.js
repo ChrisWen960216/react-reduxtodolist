@@ -10,6 +10,7 @@ export default class InputForm extends Component {
         this.onPress = this.props.onPress.bind(this);
     }
 
+
     render() {
         return ( <div className='input-line'>
                    <Input type="text" onKeyPress={ this.onPress } />

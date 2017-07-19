@@ -20,7 +20,7 @@ export default class TodosForm extends Component {
 
     render() {
         let todoList = this.props.todo.filter((item) => !item.deleted).map((item, index) => (
-            <li key={ item.id } style={ { textDecoration: item.completed ? 'line-through' : 'none' } }>
+            <li key={ item.key } style={ { textDecoration: item.completed ? 'line-through' : 'none' } }>
               <TodoItem todo={ item } onToggle={ this.onToggle } onDelete={ this.onDelete } />
             </li>
         ))
