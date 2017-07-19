@@ -37,7 +37,7 @@ class TodoComponents extends Component {
         return (
             <div className='input-components'>
               <InputForm onPress={ this.onPress } />
-              <TodosForm todo={ this.props.newState } onToggle={ this.onToggle } onDelete={ this.onDelete } />
+              <TodosForm todo={ this.props.todos } onToggle={ this.onToggle } onDelete={ this.onDelete } />
             </div>
         )
     }
@@ -45,8 +45,10 @@ class TodoComponents extends Component {
 
 //将对应的redux state 转换成组件的 props 以供使用 mapStateToProps
 function updateState(state) {
+    console.log('state', state);
     return {
-        newState: state
+        todos: state.todos,
+        filters: state.filters
     }
 }
 
