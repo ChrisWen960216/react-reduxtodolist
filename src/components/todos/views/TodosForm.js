@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TodoItem from './TodoItem.js';
 
+
 export default class TodosForm extends Component {
     constructor(props) {
         super(props);
@@ -10,14 +11,13 @@ export default class TodosForm extends Component {
 
     onToggle(e, item) {
         this.props.onToggle(e, item)
-        console.log('item', item);
     }
 
     onDelete(e, item) {
         this.props.onDelete(e, item)
-        console.log('item', item);
     }
 
+    // 遍历 todos 并进行展示，同时过滤掉已经删除的事件
     render() {
         let todoList = this.props.todo.filter((item) => !item.deleted).map((item, index) => (
             <li key={ item.key } style={ { textDecoration: item.completed ? 'line-through' : 'none' } }>

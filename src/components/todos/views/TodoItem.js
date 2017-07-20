@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 
 export default class TodoItem extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export default class TodoItem extends Component {
             <div className='todo-item'>
               <input type="checkbox" checked={ this.props.todo.completed } onChange={ this.onToggle } />
               { this.props.todo.text }
-              <button type='submit' onClick={ this.onDelete }>删除</button>
+              <Button type='danger' htmlType='submit' onClick={ this.onDelete }>删除</Button>
             </div>
         )
     }
