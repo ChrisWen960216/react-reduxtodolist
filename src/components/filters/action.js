@@ -1,7 +1,8 @@
-import { SET_VISIBILITY_FILITER } from './actionType.js';
-import { FilterTypes } from './constant.js';
+import { SET_VISIBILITY_FILTER } from './actionTypes.js';
 
-export const setFilters = (filter) => ({
-    type: SET_VISIBILITY_FILITER,
-    FilterTypes
-})
+export const setVisibilityFilter = (filter) => {
+    return {
+        type: SET_VISIBILITY_FILTER,
+        filter
+    }
+}

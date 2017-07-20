@@ -28,7 +28,6 @@ export default class TodosForm extends Component {
             <div>
               { todoList }
             </div>
-
         )
     }
 

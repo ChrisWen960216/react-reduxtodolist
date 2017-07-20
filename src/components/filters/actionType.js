@@ -1,1 +1,0 @@
-export const SET_VISIBILITY_FILITY = 'SET_VISIBILITY';
