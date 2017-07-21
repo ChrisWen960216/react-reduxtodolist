@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import TodoComponents from './todos/views/index.js';
 import HeaderComponents from './header/HeaderComponent.js';
+import UserDialog from './userDialog/index.js';
 
 export default class MainApp extends Component {
     render() {
@@ -11,6 +12,7 @@ export default class MainApp extends Component {
             <div>
               <HeaderComponents/>
               <TodoComponents/>
+              <UserDialog />
             </div>
         )
     }

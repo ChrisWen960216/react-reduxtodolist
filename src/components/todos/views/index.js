@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import InputForm from './InputForm.js';
 import TodosForm from './TodosForm.js';
 import Filters from '../../filters/views/filter.js';
+import UserDialog from '../../userDialog/index.js';
 
 import { VisibilityFilters } from '../../filters/constants.js';
 import { setVisibilityFilter } from '../../filters/action.js';
@@ -55,11 +56,13 @@ class TodoComponents extends Component {
         }
     }
 
+    /* 挂载 onChange 事件，极力避免操作 Dom 元素。
+    *  onChange 将 Input 中的值存入本地 Component 的 State 中 再经由 onClick 事件进行提交
+    */
     onChange(e) {
         this.setState({
             momentValue: e.target.value.trim()
         })
-
     }
 
     onClick() {

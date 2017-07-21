@@ -25,4 +25,7 @@
 5.  [代码分支点此跳转](https://github.com/ChrisWen960216/reduxtodolist/tree/720)。
 
 ### 2017.07.21
-1.
+1. 增加了 `DetailsComponent` 现在输入框内只能输入对应的 `todos` 标题，而详细内容和时间安排必须要在 `DetailsComponent` 中进行;
+2. 增加了一个 `SubButton` 来提交 `Input` 中的内容，使得布局看起来更加直观和合理。并且，极力避免了操作 `DOM` 元素；
+3. 引入了 `UserDialog` ，在接下来的版本中将会提供用户的 注册/登录/密码找回 等等功能；
+4. 完善说明文档，更新部署环境。
