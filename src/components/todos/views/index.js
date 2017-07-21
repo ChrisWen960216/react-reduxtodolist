@@ -22,9 +22,14 @@ import '../../../style/main.scss';
 class TodoComponents extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            momentValue: ''
+        }
         this.onToggle = this.onToggle.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onPress = this.onPress.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
     onToggle(e, todo) {
@@ -50,11 +55,25 @@ class TodoComponents extends Component {
         }
     }
 
+    onChange(e) {
+        this.setState({
+            momentValue: e.target.value.trim()
+        })
+
+    }
+
+    onClick() {
+        this.props.addTodo(this.state.momentValue);
+        this.setState({
+            momentValue: ''
+        })
+    }
+
     render() {
         const {filters} = this.props
         return (
             <div>
-              <InputForm onPress={ this.onPress } className='input-form' />
+              <InputForm className='input-form' onPress={ this.onPress } onClick={ this.onClick } onChange={ this.onChange } />
               <Filters filter={ filters } onFilterChange={ this.props.onFilterChange } />
               <TodosForm todo={ this.props.todos } onToggle={ this.onToggle } onDelete={ this.onDelete } />
             </div>

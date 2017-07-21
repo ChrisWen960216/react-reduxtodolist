@@ -14,10 +14,10 @@ export default class TodoDetail extends Component {
 
     render() {
         return (
-            <Modal className='detail-modal' title={ this.props.todo.text } visible={ this.props.modalVisible } onOk={ this.onOK } onCancel={ this.onCancel }>
-              <TextArea className='input-detail' placeholder='Write Something here!' />
+            <Modal className='detail-modal' title={ this.props.todo.text } visible={ this.props.modalVisible } onOk={ this.onOk } onCancel={ this.onCancel }>
+              <TextArea className='input-detail' placeholder='事情详情请记录在这里！如果没有，请点击关闭按钮！' />
               <div className='input-date-box'>
-                <span>请选择任务记录时间:</span>
+                <span>请选择提醒时间:</span>
                 <DatePicker showTime format='YYY-MM-DD HH:MM:SS' placeholder='Select Time' onOk={ this.onOk } />
               </div>
             </Modal>

@@ -1,4 +1,4 @@
-## React-redux TodoLists App
+## React-redux TodoLists App V2.0
 该版本基于 7.17 部署的 [react-todoList（V1.0）](https://chriswen960216.github.io/ReactTodoList/react-example/build/index.html)，使用了 react-redux 和 AntDesign UI 框架进行开发。
 
 说明文档将随着开发进度逐步更新。[项目预览地址点此跳转](https://chriswen960216.github.io/reduxtodolist/build/index.html).

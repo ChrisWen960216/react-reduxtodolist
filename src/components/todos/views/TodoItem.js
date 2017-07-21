@@ -7,7 +7,7 @@ export default class TodoItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalVisible: true
+            modalVisible: false
         }
 
         this.onToggle = this.onToggle.bind(this);
