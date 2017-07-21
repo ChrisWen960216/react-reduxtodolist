@@ -22,7 +22,7 @@ export default class TodosForm extends Component {
     render() {
         let todoList = this.props.todo.filter((item) => !item.deleted).map((item, index) => (
             <li key={ item.key } style={ { textDecoration: item.completed ? 'line-through' : 'none' } }>
-              <Card className='todo-card' bodyStyle={ { padding: 15 } }>
+              <Card className='todo-card'>
                 <TodoItem todo={ item } onToggle={ this.onToggle } onDelete={ this.onDelete } />
               </Card>
             </li>

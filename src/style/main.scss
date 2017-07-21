@@ -12,7 +12,16 @@
 
 .input-line{
     width: 90%;
+    max-width: 1440px;
     margin: 0 auto;
+    
+    .input-form{
+        width: 80%;
+        max-width: 750px;
+    }
+    .input-button{
+        margin-left: 5px;
+    }
 }
 
 body{
@@ -30,15 +39,15 @@ ul,li{
 
 .todo-card{
     margin: 0 auto;
+    max-width: 800px;
+    width:98%;
     h3{
         display: inline-block;
         margin: 0 5px;
         padding: 0;
-        border: 1px solid pink;
     }
-    .check-button{
+    .check-button,{
         float: left;
-        border: 1px solid red;
     }
     .delete-button{
         float: right;
@@ -47,5 +56,16 @@ ul,li{
         float: right;
         margin-right: 5px;
     }
+    
 
 }
+.detail-modal{
+        max-width: 800px;
+    }
+.input-date-box{
+            margin: 15px;
+            text-align: right;
+            span:first-child{
+                margin-right: 10px;
+            }
+        }
