@@ -20,7 +20,7 @@ export default class TodoItem extends Component {
     render() {
         return (
             <div className='todo-item'>
-              <Checkbox checked={ this.props.todo.completed } onChange={ this.onToggle } />
+              <Checkbox className='check-button' checked={ this.props.todo.completed } onChange={ this.onToggle } />
               <h3>{ this.props.todo.text }</h3>
               <Button className='delete-button' type='danger' htmlType='submit' onClick={ this.onDelete }>删除</Button>
               <Button className='detail-button' type='primary'>详情</Button>

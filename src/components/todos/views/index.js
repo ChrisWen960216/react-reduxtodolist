@@ -74,8 +74,6 @@ function selectTodos(todos, filter) {
             return todos.filter(todo => todo.completed);
         case VisibilityFilters.SHOW_UNCOMPLETED:
             return todos.filter(todo => !todo.completed);
-        case VisibilityFilters.SHOW_DELETED:
-            return todos.filter(todo => todo.deleted);
         default:
             return todos
     }

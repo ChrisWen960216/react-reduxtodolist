@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+//import {compose}from 'redux';
 import { TodoReducer, FilterReducer } from './todos/reducer.js';
 
 
@@ -11,8 +12,9 @@ let reducer = combineReducers({
 })
 
 //applyMiddleware(middlewares)(createStore)(reducer)
-let store = createStore(reducer, compose(applyMiddleware(loggerConst), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
+//let store = createStore(reducer, compose(applyMiddleware(loggerConst), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
 // let store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
+let store = applyMiddleware(loggerConst)(createStore)(reducer);
 
 export default store;

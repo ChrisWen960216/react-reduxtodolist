@@ -2,7 +2,7 @@ import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from './actionType.js';
 import { SET_VISIBILITY_FILTER } from '../filters/actionTypes.js';
 import { VisibilityFilters } from '../filters/constants.js'
 
-let nextTodoId = 0;
+//let nextTodoId = 0;
 const {SHOW_ALL} = VisibilityFilters;
 
 export const TodoReducer = (state = [], action) => {
@@ -10,7 +10,7 @@ export const TodoReducer = (state = [], action) => {
         case ADD_TODO: {
             return [
                 {
-                    id: nextTodoId++,
+                    id: Math.random(),
                     text: action.text,
                     completed: false,
                     deleted: false
