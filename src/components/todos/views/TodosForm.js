@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoItem from './TodoItem.js';
+import { Card } from 'antd';
 
 
 export default class TodosForm extends Component {
@@ -20,8 +21,11 @@ export default class TodosForm extends Component {
     // 遍历 todos 并进行展示，同时过滤掉已经删除的事件
     render() {
         let todoList = this.props.todo.filter((item) => !item.deleted).map((item, index) => (
+            // eslint-disable-next-line
             <li key={ item.key } style={ { textDecoration: item.completed ? 'line-through' : 'none' } }>
-              <TodoItem todo={ item } onToggle={ this.onToggle } onDelete={ this.onDelete } />
+              <Card className='todo-card' bodyStyle={ { padding: 15 } }>
+                <TodoItem todo={ item } onToggle={ this.onToggle } onDelete={ this.onDelete } />
+              </Card>
             </li>
         ))
         return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
+import { Button, Checkbox } from 'antd';
 
 export default class TodoItem extends Component {
     constructor(props) {
@@ -20,9 +20,10 @@ export default class TodoItem extends Component {
     render() {
         return (
             <div className='todo-item'>
-              <input type="checkbox" checked={ this.props.todo.completed } onChange={ this.onToggle } />
-              { this.props.todo.text }
-              <Button type='danger' htmlType='submit' onClick={ this.onDelete }>删除</Button>
+              <Checkbox checked={ this.props.todo.completed } onChange={ this.onToggle } />
+              <h3>{ this.props.todo.text }</h3>
+              <Button className='delete-button' type='danger' htmlType='submit' onClick={ this.onDelete }>删除</Button>
+              <Button className='detail-button' type='primary'>详情</Button>
             </div>
         )
     }

@@ -2,6 +2,46 @@
     margin: 5px;
 }
 
+.filter-button-list{
+    margin: 0 auto;
+}
+
+.title-col{
+    text-align: center;
+}
+
+.input-line{
+    width: 90%;
+    margin: 0 auto;
+}
+
 body{
+    text-align: center;
     background-color: #eee;
+}
+
+header{
+    margin-bottom: 20px;
+}
+
+ul,li{
+    list-style: none;
+}
+
+.todo-card{
+    margin: 0 auto;
+    h3{
+        display: inline-block;
+        margin: 0 5px;
+        padding: 0;
+        border: 1px solid pink;
+    }
+    .delete-button{
+        float: right;
+    }
+    .detail-button{
+        float: right;
+        margin-right: 5px;
+    }
+
 }

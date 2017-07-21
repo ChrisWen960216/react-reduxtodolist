@@ -13,7 +13,7 @@ export default class InputForm extends Component {
 
     render() {
         return ( <div className='input-line'>
-                   <Input type="text" onKeyPress={ this.onPress } />
+                   <Input type="text" onKeyPress={ this.onPress } placeholder='Please Input your todoItem!' maxLength='7' />
                  </div>
         )
     }

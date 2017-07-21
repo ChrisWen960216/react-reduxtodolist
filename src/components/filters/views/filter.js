@@ -11,14 +11,13 @@ export default class Filters extends Component {
                     </Button>);
         }
         return (
-
             <Button type='dashed' className='filter-button'>
-              <a href="#" onClick={ e => {
-                                        e.preventDefault();
-                                        this.props.onFilterChange(filter);
-                                    } }>
+              <p onClick={ e => {
+                               e.preventDefault();
+                               this.props.onFilterChange(filter);
+                           } }>
                 { name }
-              </a>
+              </p>
             </Button>
 
         )
@@ -26,11 +25,11 @@ export default class Filters extends Component {
 
     render() {
         return (
-            <p>
+            <div className='filter-button-list'>
               { this.renderFilter('SHOW_ALL', '全部') }
               { this.renderFilter('SHOW_COMPLETED', '完成') }
-              { this.renderFilter('SHOW_UNCOMPLETED', '激活') } .
-            </p>
+              { this.renderFilter('SHOW_UNCOMPLETED', '未做') }
+            </div>
         )
     }
 }

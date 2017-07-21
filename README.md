@@ -17,8 +17,12 @@
 3. 学习 `middleware` 将酌情添加更多中间件用以跟踪 `action`；
 4. 完善说明文档，更新部署环境;
 
-### 2017.07.20 
+### 2017.07.20
 1. 完成 `FilterComponent` 的引入，现在对应状态的 `todos` 将会拥有自己独立的 `Filter`来进行查看；
 2. 加入部分 `AntDesign UI` 框架，略微增加部分 `SCSS` 文件，美化样式；
 3. 使用了 `Redux-Dev-Tools` 插件进行开发，现在本系统中所有 `Redux` 的 `State` 和 `Dispatch` 都能直观的可视化，并且进行跟踪；
-4. 完善说明文档，更新部署环境。
+4. 完善说明文档，更新部署环境；
+5.  [代码分支点此跳转](https://github.com/ChrisWen960216/reduxtodolist/tree/720)。
+
+### 2017.07.21
+1.

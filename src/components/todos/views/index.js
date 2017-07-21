@@ -17,7 +17,6 @@ import { setVisibilityFilter } from '../../filters/action.js';
 import { connect } from 'react-redux';
 import { addTodo, toggleTodo, deleteTodo } from '../action.js';
 
-import { Col, Row } from 'antd';
 import '../../../style/main.scss';
 
 class TodoComponents extends Component {
@@ -54,21 +53,11 @@ class TodoComponents extends Component {
     render() {
         const {filters} = this.props
         return (
-            <Row>
-              <Col span={ 8 }></Col>
-              <Col span={ 8 }>
+            <div>
               <InputForm onPress={ this.onPress } className='input-form' />
-              <Row>
-                <Col span={ 8 }></Col>
-                <Col span={ 8 }>
-                <Filters filter={ filters } onFilterChange={ this.props.onFilterChange } />
-                <TodosForm todo={ this.props.todos } onToggle={ this.onToggle } onDelete={ this.onDelete } />
-                </Col>
-                <Col span={ 8 }></Col>
-              </Row>
-              </Col>
-              <Col span={ 8 }></Col>
-            </Row>
+              <Filters filter={ filters } onFilterChange={ this.props.onFilterChange } />
+              <TodosForm todo={ this.props.todos } onToggle={ this.onToggle } onDelete={ this.onDelete } />
+            </div>
 
         )
     }
@@ -85,6 +74,8 @@ function selectTodos(todos, filter) {
             return todos.filter(todo => todo.completed);
         case VisibilityFilters.SHOW_UNCOMPLETED:
             return todos.filter(todo => !todo.completed);
+        case VisibilityFilters.SHOW_DELETED:
+            return todos.filter(todo => todo.deleted);
         default:
             return todos
     }
