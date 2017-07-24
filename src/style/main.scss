@@ -25,7 +25,6 @@
 }
 
 body{
-    text-align: center;
     background-color: #eee;
 }
 
@@ -63,15 +62,25 @@ ul,li{
         max-width: 800px;
     }
 .input-date-box{
-            margin-top: 15px;
             text-align: right;
             span:first-child{
                 margin-right: 10px;
             }
         }
 
-#log-modal{
-    width: 100px;
-    margin: 0 auto;
-    border: 1px solid red;
+
+
+#main-app{
+    text-align: center;
+}
+
+.userDiog-input{
+    margin: 5px;
+}
+
+.input-switch{
+    text-align: right;
+    margin: 5px 0;
+     color: #108ee9;
+    cursor: default;
 }

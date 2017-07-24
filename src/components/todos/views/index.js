@@ -11,12 +11,12 @@ import React, { Component } from 'react';
 import InputForm from './InputForm.js';
 import TodosForm from './TodosForm.js';
 import Filters from '../../filters/views/filter.js';
-import UserDialog from '../../userDialog/index.js';
+//import UserDialog from '../../userDialog/index.js';
 
 import { VisibilityFilters } from '../../filters/constants.js';
 import { setVisibilityFilter } from '../../filters/action.js';
 import { connect } from 'react-redux';
-import { addTodo, toggleTodo, deleteTodo } from '../action.js';
+import { addTodo, toggleTodo, deleteTodo, detailTodo } from '../action.js';
 
 import '../../../style/main.scss';
 
@@ -24,13 +24,18 @@ class TodoComponents extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            momentValue: ''
+            momentValue: '',
+            momentDetails: '',
+            momentDate: ''
         }
         this.onToggle = this.onToggle.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onPress = this.onPress.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onAddDetails = this.onAddDetails.bind(this);
+        this.changeDetails = this.changeDetails.bind(this);
+        this.changeDate = this.changeDate.bind(this);
     }
 
     onToggle(e, todo) {
@@ -56,6 +61,21 @@ class TodoComponents extends Component {
         }
     }
 
+    onAddDetails(e, todo) {
+        let id = todo.id;
+        this.props.detailTodo(id, this.state.momentDetails, this.state.momentValue);
+        this.setState({
+            momentDetails: '',
+            momentValue: ''
+        })
+    }
+
+    changeDetails(e) {
+        this.setState({
+            momentDetails: e.target.value
+        })
+    }
+    changeDate() {}
     /* 挂载 onChange 事件，极力避免操作 Dom 元素。
     *  onChange 将 Input 中的值存入本地 Component 的 State 中 再经由 onClick 事件进行提交
     */
@@ -66,10 +86,14 @@ class TodoComponents extends Component {
     }
 
     onClick() {
-        this.props.addTodo(this.state.momentValue);
-        this.setState({
-            momentValue: ''
-        })
+        if (this.state.momentValue === '') {
+            alert('不被接受的数据！')
+        } else {
+            this.props.addTodo(this.state.momentValue);
+            this.setState({
+                momentValue: ''
+            })
+        }
     }
 
     render() {
@@ -78,7 +102,8 @@ class TodoComponents extends Component {
             <div>
               <InputForm className='input-form' onPress={ this.onPress } onClick={ this.onClick } onChange={ this.onChange } />
               <Filters filter={ filters } onFilterChange={ this.props.onFilterChange } />
-              <TodosForm todo={ this.props.todos } onToggle={ this.onToggle } onDelete={ this.onDelete } />
+              <TodosForm todo={ this.props.todos } onToggle={ this.onToggle } onDelete={ this.onDelete } onAddDetails={ this.onAddDetails } changeDetails={ this.changeDetails }
+                changeDate={ this.changeDate } />
             </div>
 
         )
@@ -104,6 +129,7 @@ function selectTodos(todos, filter) {
 
 //将对应的redux state 转换成组件的 props 以供使用 mapStateToProps
 function mapStateToProps(state) {
+    console.log('state', state);
     return {
         todos: selectTodos(state.todos, state.filters),
         filters: state.filters
@@ -116,6 +142,7 @@ function mapDispatchToProps(dispatch) {
         addTodo: (text) => dispatch(addTodo(text)),
         toggleTodo: (id) => dispatch(toggleTodo(id)),
         deleteTodo: (id) => dispatch(deleteTodo(id)),
+        detailTodo: (id, text) => dispatch(detailTodo(id, text)),
         onFilterChange: (nextFilter) => dispatch(setVisibilityFilter(nextFilter))
     }
 }

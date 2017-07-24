@@ -13,7 +13,9 @@ export default class TodoItem extends Component {
         this.onToggle = this.onToggle.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.showDetail = this.showDetail.bind(this);
-        this.onOk = this.onOk.bind(this);
+        this.onAddDetails = this.onAddDetails.bind(this);
+        this.changeDetails = this.changeDetails.bind(this);
+        this.changeDate = this.changeDate.bind(this);
         this.onCancel = this.onCancel.bind(this);
     }
 
@@ -32,8 +34,17 @@ export default class TodoItem extends Component {
         })
     }
 
-    onOk() {
-        this.onCancel();
+    onAddDetails(e) {
+        this.props.onAddDetails(e, this.props.todo);
+    //this.onCancel();
+    }
+
+    changeDate(e) {
+        this.props.changeDate(e, this.props.todo);
+    }
+
+    changeDetails(e) {
+        this.props.changeDetails(e, this.props.todo)
     }
 
     onCancel() {
@@ -47,7 +58,8 @@ export default class TodoItem extends Component {
             <div className='todo-item'>
               <Checkbox className='check-button' checked={ this.props.todo.completed } onChange={ this.onToggle } />
               <h3>{ this.props.todo.text }</h3>
-              <TodoDetail todo={ this.props.todo } modalVisible={ this.state.modalVisible } onOk={ this.onOk } onCancel={ this.onCancel } />
+              <TodoDetail todo={ this.props.todo } modalVisible={ this.state.modalVisible } onOk={ this.onAddDetails } onCancel={ this.onCancel } changeDetails={ this.changeDetails }
+                changeDate={ this.changeDate } />
               <Button className='delete-button' type='danger' htmlType='submit' onClick={ this.onDelete }>删除</Button>
               <Button className='detail-button' type='primary' onClick={ this.showDetail }>详情</Button>
             </div>

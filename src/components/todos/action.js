@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from './actionType.js';
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, DETAIL_TODO } from './actionType.js';
 
 
 
@@ -15,4 +15,10 @@ export const toggleTodo = (id) => ({
 export const deleteTodo = (id) => ({
     type: DELETE_TODO,
     id
+})
+
+export const detailTodo = (id, text) => ({
+    type: DETAIL_TODO,
+    id,
+    text
 })
