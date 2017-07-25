@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import LoginInPanel from './LoginInPanel.js';
 import LoginOnPanel from './LoginOnPanel.js';
-import FindPassWordPanel from './FindPassWordPanel.js';
+import FindPassWordPanel from './FindPasswordPanel.js';
 
 import { Modal } from 'antd';
 

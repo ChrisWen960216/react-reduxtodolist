@@ -9,7 +9,7 @@ export default class HeaderComponents extends Component {
             <header>
               <div className='title-col'>
                 <h1>React-TodoList</h1>
-                <h3>Created By ChrisWen V2.0</h3> 欢迎您!
+                <h3>Created By ChrisWen V2.0</h3>
               </div>
             </header>
         )

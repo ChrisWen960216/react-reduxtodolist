@@ -48,18 +48,16 @@ class TodoComponents extends Component {
     }
 
     onPress(e) {
-        let text = e.target.value.trim();
         if (e.key === 'Enter') {
-            if (text === '') {
+            if (e.target.value === '') {
                 alert('不能为空！')
             } else {
-                this.props.addTodo(text);
+                this.props.addTodo(e.target.value);
                 e.target.value = '';
                 this.setState({
                     momentValue: ''
                 })
             }
-
         }
     }
 
@@ -80,7 +78,7 @@ class TodoComponents extends Component {
     */
     onChange(e) {
         this.setState({
-            momentValue: e.target.value.trim()
+            momentValue: e.target.value
         })
     }
 
@@ -89,10 +87,10 @@ class TodoComponents extends Component {
             alert('不被接受的数据！')
         } else {
             this.props.addTodo(this.state.momentValue);
-            this.setState({
-                momentValue: ''
-            })
         }
+        this.setState({
+            momentValue: ''
+        })
     }
 
     render() {
