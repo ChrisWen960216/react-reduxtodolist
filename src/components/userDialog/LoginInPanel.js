@@ -46,8 +46,7 @@ class LoginIn extends Component {
               </FormItem>
               <FormItem>
                 { getFieldDecorator('remember', {
-                      valuePropName: 'checked',
-                      initialValue: true,
+                      valuePropName: 'checked'
                   })(
                       <Checkbox>Remember me</Checkbox>
                   ) }
