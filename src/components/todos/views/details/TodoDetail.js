@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, Input, DatePicker, Switch, Card } from 'antd';
+import { Modal, Input, Switch, Card } from 'antd';
+//import{DatePicker}from 'antd';
 const {TextArea} = Input;
 
 export default class TodoDetail extends Component {
@@ -10,7 +11,7 @@ export default class TodoDetail extends Component {
             dateValue: ''
         };
         this.changeDetails = this.props.changeDetails.bind(this);
-        this.onOk = this.props.onOk.bind(this);
+        this.onOk = this.onOk.bind(this);
         this.changeDate = this.props.changeDate.bind(this);
         this.onCancel = this.props.onCancel.bind(this);
         this.switchInput = this.switchInput.bind(this);
@@ -24,6 +25,16 @@ export default class TodoDetail extends Component {
             textAreaDisabled: !textAreaDisabled
         })
     }
+    onOk(e) {
+        e.preventDefault();
+        this.props.onOk();
+
+        let disable = this.state.textAreaDisabled;
+        if (disable === false) {
+            this.switchInput()
+        }
+    }
+
 
     onPressEnter(e) {
         e.preventDefault();
@@ -36,7 +47,7 @@ export default class TodoDetail extends Component {
 
 
     render() {
-        const detailCard = this.props.todo.details ? <Card title={ this.props.todo.text + '详情预览' }>
+        const detailCard = this.props.todo.details ? <Card className='detail-card' title={ this.props.todo.text + '详情预览' }>
                                                        { this.props.todo.details }
                                                      </Card> : ''
         return (
@@ -47,10 +58,10 @@ export default class TodoDetail extends Component {
                 <div className='input-switch'>
                   <span>点此添加详情:  <Switch checked={ !this.state.textAreaDisabled } onChange={ this.switchInput } /></span>
                 </div>
-                <div className='input-date-box'>
-                  <span>请选择提醒时间:</span>
-                  <DatePicker showTime format='YY-MM-DD HH:MM:SS' placeholder='Select Time' onChange={ this.changeDate } onOk={ this.onOk } />
-                </div>
+                { /*<div className='input-date-box'>
+                                                                                                                                                                                                                                                                                                                                                  <span>请选择提醒时间:</span>
+                                                                                                                                                                                                                                                                                                                                                  <DatePicker showTime format='YY-MM-DD HH:MM:SS' placeholder='Select Time' onChange={ this.changeDate } onOk={ this.onOk.bind(this) } />
+                                                                                                                                                                                                                                                                                                                                                </div>*/ }
               </div>
             </Modal>
         )

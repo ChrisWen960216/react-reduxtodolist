@@ -1,19 +1,46 @@
 import React, { Component } from 'react';
-import { Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
+const FormItem = Form.Item;
 
-export default class FindPassWordPanel extends Component {
+
+class FindPassWord extends Component {
+    constructor(props) {
+        super(props);
+        this.returnLogIn = this.props.returnLogIn.bind(this);
+    }
+    //点击找回按钮按钮事件
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    }
+
     render() {
+        const {getFieldDecorator} = this.props.form;
         return (
-            <form action="submit">
-              <ul>
-                <li> <span>邮箱：</span>
-                  <Input prefix={ <Icon type='mail' style={ { fontSize: 13 } } /> } placeholder='Email' className='userDiog-input' />
-                </li>
-                <li>
-                  <Button htmlType='submit' type='primary'>找回密码</Button>
-                  <a href="#">突然想起来密码了？点这里返回</a></li>
-              </ul>
-            </form>
-        )
+            <Form onSubmit={ this.handleSubmit } className="login-form">
+              <FormItem>
+                { getFieldDecorator('email', {
+                      rules: [{
+                          type: 'email',
+                          message: 'The input is not valid E-mail!',
+                      }, {
+                          required: true,
+                          message: 'Please input your E-mail!',
+                      }],
+                  })(
+                      <Input prefix={ <Icon type="mail" style={ { fontSize: 13 } } /> } type="text" placeholder="请输入邮箱" />
+                  ) }
+              </FormItem>
+              <a href="" onClick={ this.returnLogIn }>点这里返回登录界面</a>
+              <Button type="primary" htmlType="submit" className="login-form-button">找回密码</Button>
+            </Form>
+            );
     }
 }
+
+const FindPassWordPanel = Form.create()(FindPassWord);
+export default FindPassWordPanel;

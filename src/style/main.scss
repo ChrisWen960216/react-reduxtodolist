@@ -20,7 +20,7 @@
         max-width: 750px;
     }
     .input-button{
-        margin-left: 5px;
+        margin: 5px;
     }
 }
 
@@ -37,7 +37,7 @@ ul,li{
 }
 
 .todo-card{
-    margin: 0 auto;
+    margin: 5px auto;
     max-width: 800px;
     width:98%;
     h3{
@@ -84,3 +84,17 @@ ul,li{
      color: #108ee9;
     cursor: default;
 }
+
+.detail-card{
+    margin-bottom: 5px;
+}
+
+.login-panel{
+    li{
+        margin: 5px;
+    }
+    
+}
+.login-form-button{
+        width: 100%;
+    }

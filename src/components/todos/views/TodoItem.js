@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Checkbox } from 'antd';
-
 import TodoDetail from './details/TodoDetail.js';
 
 export default class TodoItem extends Component {
@@ -36,7 +35,7 @@ export default class TodoItem extends Component {
 
     onAddDetails(e) {
         this.props.onAddDetails(e, this.props.todo);
-    //this.onCancel();
+        setInterval(this.onCancel(), 1000);
     }
 
     changeDate(e) {

@@ -35,7 +35,6 @@ class TodoComponents extends Component {
         this.onClick = this.onClick.bind(this);
         this.onAddDetails = this.onAddDetails.bind(this);
         this.changeDetails = this.changeDetails.bind(this);
-        this.changeDate = this.changeDate.bind(this);
     }
 
     onToggle(e, todo) {
@@ -56,6 +55,9 @@ class TodoComponents extends Component {
             } else {
                 this.props.addTodo(text);
                 e.target.value = '';
+                this.setState({
+                    momentValue: ''
+                })
             }
 
         }
@@ -63,11 +65,8 @@ class TodoComponents extends Component {
 
     onAddDetails(e, todo) {
         let id = todo.id;
-        this.props.detailTodo(id, this.state.momentDetails, this.state.momentValue);
-        this.setState({
-            momentDetails: '',
-            momentValue: ''
-        })
+        let detail = this.state.momentDetails;
+        this.props.detailTodo(id, detail);
     }
 
     changeDetails(e) {
@@ -75,7 +74,7 @@ class TodoComponents extends Component {
             momentDetails: e.target.value
         })
     }
-    changeDate() {}
+
     /* 挂载 onChange 事件，极力避免操作 Dom 元素。
     *  onChange 将 Input 中的值存入本地 Component 的 State 中 再经由 onClick 事件进行提交
     */
@@ -103,9 +102,8 @@ class TodoComponents extends Component {
               <InputForm className='input-form' onPress={ this.onPress } onClick={ this.onClick } onChange={ this.onChange } />
               <Filters filter={ filters } onFilterChange={ this.props.onFilterChange } />
               <TodosForm todo={ this.props.todos } onToggle={ this.onToggle } onDelete={ this.onDelete } onAddDetails={ this.onAddDetails } changeDetails={ this.changeDetails }
-                changeDate={ this.changeDate } />
+              />
             </div>
-
         )
     }
 }

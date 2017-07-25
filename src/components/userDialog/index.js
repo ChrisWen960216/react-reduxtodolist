@@ -2,37 +2,72 @@
  * Main Entries of userDialog
  */
 import React, { Component } from 'react';
-import LogInPanel from './LogInPanel.js';
-import LogOnPanel from './LogOnPanel.js';
-import FindPassWordPanel from './FindPasswordPanel.js';
+import LoginInPanel from './LoginInPanel.js';
+import LoginOnPanel from './LoginOnPanel.js';
+import FindPassWordPanel from './FindPassWordPanel.js';
 
-import { Modal, Tabs } from 'antd';
-
-const TabPane = Tabs.TabPane;
+import { Modal } from 'antd';
 
 export default class userDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visibility: true
+      visibility: true,
+      changeModel: true,
+      findPassWord: false
     }
+    this.findPassWord = this.findPassWord.bind(this);
+    this.changePanel = this.changePanel.bind(this);
+    this.closeDialog = this.closeDialog.bind(this);
+    this.returnLogIn = this.returnLogIn.bind(this);
   }
 
+  changePanel(e) {
+    e.preventDefault();
+    this.setState({
+      changeModel: !this.state.changeModel
+    })
+  }
+
+  findPassWord(e) {
+    e.preventDefault();
+    this.setState({
+      findPassWord: true
+    })
+  }
+
+  returnLogIn(e) {
+    e.preventDefault();
+    this.setState({
+      findPassWord: false
+    })
+  }
+
+  closeDialog() {
+    this.setState({
+      visibility: false
+    })
+  }
+
+
+
   render() {
+    const changePanel = () => {
+      if (this.state.findPassWord === true) {
+        return <FindPassWordPanel returnLogIn={ this.returnLogIn } />
+      } else {
+        if (this.state.changeModel === true) {
+          return <LoginInPanel findPassWord={ this.findPassWord } changePanel={ this.changePanel } closeDialog={ this.closeDialog } />
+        } else {
+          return <LoginOnPanel changePanel={ this.changePanel } closeDialog={ this.closeDialog } />
+        }
+      }
+    }
     return (
-      <Modal visible={ this.state.visibility }>
-        <Tabs tab='登录/注册' defaultActiveKey='logIn'>
-          <TabPane tab='登录' key="logIn">
-            <LogInPanel/>
-          </TabPane>
-          <TabPane tab='注册' key="logOn">
-            <LogOnPanel/>
-          </TabPane>
-          <TabPane tab='找回密码' key='finPassWord'>
-            <FindPassWordPanel/>
-          </TabPane>
-        </Tabs>
+      <Modal title='账号中心' visible={ this.state.visibility } width={ 400 } footer={ null } closable={ false }>
+        { changePanel() }
       </Modal>
+
     )
   }
 }
