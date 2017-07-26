@@ -20,6 +20,7 @@ export default class userDialog extends Component {
     this.changePanel = this.changePanel.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
     this.returnLogIn = this.returnLogIn.bind(this);
+    this.userLoginOn = this.props.userLoginOn.bind(this);
   }
 
   changePanel(e) {
@@ -51,6 +52,16 @@ export default class userDialog extends Component {
 
 
 
+
+  // const successMessage = () => {
+  //     message.success('欢迎您!' + userName)
+  // }
+
+  //successMessage();
+
+
+
+
   render() {
     const changePanel = () => {
       if (this.state.findPassWord === true) {
@@ -59,7 +70,7 @@ export default class userDialog extends Component {
         if (this.state.changeModel === true) {
           return <LoginInPanel findPassWord={ this.findPassWord } changePanel={ this.changePanel } closeDialog={ this.closeDialog } />
         } else {
-          return <LoginOnPanel changePanel={ this.changePanel } closeDialog={ this.closeDialog } />
+          return <LoginOnPanel changePanel={ this.changePanel } closeDialog={ this.closeDialog } userLoginOn={ this.userLoginOn } />
         }
       }
     }

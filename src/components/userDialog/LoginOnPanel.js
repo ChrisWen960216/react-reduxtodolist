@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
-import { signUp } from '../../api/leanCloud.js';
+//import { signUp } from '../../api/leanCloud.js';
 const FormItem = Form.Item;
 
 
@@ -10,25 +10,18 @@ class LoginOn extends Component {
         this.changePanel = this.props.changePanel.bind(this);
     }
 
+
+
     //点击注册按钮事件
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                let userName = values.userName;
-                let passWord = values.passWord;
-                let email = values.email;
-                let success = (user) => {
-                    console.log('user', user)
-                }
-                let error = (error) => {
-                    console.log('error', error);
-                }
-                signUp(userName, passWord, email, success, error)
+                this.props.userLoginOn(values);
+
             //this.props.closeDialog();
             }
         });
-
     }
 
     render() {
@@ -65,7 +58,7 @@ class LoginOn extends Component {
                           message: '请输入你的E-mail!'
                       }],
                   })(
-                      <Input prefix={ <Icon type="mail" style={ { fontSize: 13 } } /> } type="password" placeholder="请输入邮箱" />
+                      <Input prefix={ <Icon type="mail" style={ { fontSize: 13 } } /> } placeholder="请输入邮箱" />
                   ) }
               </FormItem>
               <FormItem>

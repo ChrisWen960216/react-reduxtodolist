@@ -1,3 +1,4 @@
+
 .filter-button{
     margin: 5px;
 }
@@ -22,10 +23,6 @@
     .input-button{
         margin: 5px;
     }
-}
-
-body{
-    background-color: #eee;
 }
 
 header{
@@ -72,6 +69,7 @@ ul,li{
 
 #main-app{
     text-align: center;
+    //background-color: rgb(190, 200, 200);
 }
 
 .userDiog-input{
@@ -97,4 +95,18 @@ ul,li{
 }
 .login-form-button{
         width: 100%;
+    }
+
+    .user-button{
+float: left;
+    }
+
+    .quit-button{
+        float: right;
+    }
+
+    .header-row{
+        background-color: rgb(190, 200, 200);
+        
+        padding: 3px;
     }
