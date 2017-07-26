@@ -30,16 +30,31 @@ export function signUp(username, password, email, successFn, errorFn) {
     return undefined
 }
 
+//用户登录
+export function signIn(username, password, successFn, errorFn) {
+    AV.User.logIn(username, password).then(function(loginedUser) {
+        let user = getUserFromAVUser(loginedUser)
+        successFn.call(null, user)
+    }, function(error) {
+        errorFn.call(null, error)
+    })
+}
+
 //获取 记住用户
 export function getCurrentUser() {
     let user = AV.User.current();
     if (user) {
         return getUserFromAVUser(user)
     } else {
-        alert('没有用户！')
         return null
     }
 
+}
+
+//用户登出
+export function signOut() {
+    AV.User.logOut();
+    return undefined;
 }
 
 function getUserFromAVUser(AVUser) {

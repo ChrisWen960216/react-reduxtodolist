@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+
 const FormItem = Form.Item;
 
 
@@ -14,8 +15,8 @@ class LoginIn extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                this.props.closeDialog();
+                this.props.userLoginIn(values);
+            //this.props.closeDialog();
             }
         });
     }
