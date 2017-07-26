@@ -35,7 +35,7 @@ class LoginIn extends Component {
                   ) }
               </FormItem>
               <FormItem>
-                { getFieldDecorator('password', {
+                { getFieldDecorator('passWord', {
                       rules: [{
                           required: true,
                           message: 'Please input your Password!'

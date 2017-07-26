@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
+import { signUp } from '../../api/leanCloud.js';
 const FormItem = Form.Item;
 
 
@@ -14,8 +15,17 @@ class LoginOn extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                this.props.closeDialog();
+                let userName = values.userName;
+                let passWord = values.passWord;
+                let email = values.email;
+                let success = (user) => {
+                    console.log('user', user)
+                }
+                let error = (error) => {
+                    console.log('error', error);
+                }
+                signUp(userName, passWord, email, success, error)
+            //this.props.closeDialog();
             }
         });
 
@@ -29,17 +39,17 @@ class LoginOn extends Component {
                 { getFieldDecorator('userName', {
                       rules: [{
                           required: true,
-                          message: 'Please input your username!'
+                          message: '请输入用户名!'
                       }],
                   })(
                       <Input prefix={ <Icon type="user" style={ { fontSize: 13 } } /> } placeholder="请输入用户名" />
                   ) }
               </FormItem>
               <FormItem>
-                { getFieldDecorator('password', {
+                { getFieldDecorator('passWord', {
                       rules: [{
                           required: true,
-                          message: 'Please input your Password!'
+                          message: '请输入密码!'
                       }],
                   })(
                       <Input prefix={ <Icon type="lock" style={ { fontSize: 13 } } /> } type="password" placeholder="请输入密码" />
@@ -49,10 +59,10 @@ class LoginOn extends Component {
                 { getFieldDecorator('email', {
                       rules: [{
                           type: 'email',
-                          message: 'The input is not valid E-mail!',
+                          message: 'E-mail地址的格式不正确!',
                       }, {
                           required: true,
-                          message: 'Please input your E-mail!'
+                          message: '请输入你的E-mail!'
                       }],
                   })(
                       <Input prefix={ <Icon type="mail" style={ { fontSize: 13 } } /> } type="password" placeholder="请输入邮箱" />
