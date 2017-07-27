@@ -65,7 +65,6 @@ class TodoComponents extends Component {
             if (e.target.value === '') {
                 alert('不能为空！')
             } else {
-
                 this.props.addTodo(e.target.value);
                 e.target.value = '';
                 this.setState({

@@ -25,8 +25,8 @@ export default class TodoDetail extends Component {
             textAreaDisabled: !textAreaDisabled
         })
     }
-    onOk(e) {
-        e.preventDefault();
+    onOk() {
+
         this.props.onOk();
 
         let disable = this.state.textAreaDisabled;
@@ -59,9 +59,9 @@ export default class TodoDetail extends Component {
                   <span>点此添加详情:  <Switch checked={ !this.state.textAreaDisabled } onChange={ this.switchInput } /></span>
                 </div>
                 { /*<div className='input-date-box'>
-                                                                                                                                                                                                                                                                                                                                                  <span>请选择提醒时间:</span>
-                                                                                                                                                                                                                                                                                                                                                  <DatePicker showTime format='YY-MM-DD HH:MM:SS' placeholder='Select Time' onChange={ this.changeDate } onOk={ this.onOk.bind(this) } />
-                                                                                                                                                                                                                                                                                                                                                </div>*/ }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  <span>请选择提醒时间:</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  <DatePicker showTime format='YY-MM-DD HH:MM:SS' placeholder='Select Time' onChange={ this.changeDate } onOk={ this.onOk.bind(this) } />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>*/ }
               </div>
             </Modal>
         )

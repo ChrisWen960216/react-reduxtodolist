@@ -1,7 +1,9 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, DETAIL_TODO, READ_TODO } from './actionType.js';
 import { SET_VISIBILITY_FILTER } from '../filters/actionTypes.js';
 import { VisibilityFilters } from '../filters/constants.js';
+import { TodoModel } from '../../api/leanCloud.js';
 
+import { message } from 'antd';
 
 //let nextTodoId = 0;
 const {SHOW_ALL} = VisibilityFilters;
@@ -35,15 +37,25 @@ export const TodoReducer = (state = [], action) => {
                 completed: false,
                 deleted: false
             }
+            TodoModel.create(newTodo, (id) => {
+                newTodo.id = id;
+            }, (success) => {
+                message.success('云端同步更新成功!')
+            })
             return ([newTodo, ...state])
         }
         case TOGGLE_TODO: {
             return state.map((todo) => {
                 if (todo.id === action.id) {
-                    return {
+                    let newTodo = {
                         ...todo,
                         completed: !todo.completed
                     }
+                    TodoModel.update(newTodo, () => {
+                        //todo.completed = true;
+                        //console.log('todo', todo);
+                    })
+                    return newTodo
                 } else {
                     return todo
                 }
@@ -52,6 +64,8 @@ export const TodoReducer = (state = [], action) => {
         case DELETE_TODO: {
             return state.map((todo) => {
                 if (todo.id === action.id) {
+                    TodoModel.destroy(todo.id, () => {
+                    })
                     return {
                         ...todo,
                         deleted: true
@@ -64,14 +78,19 @@ export const TodoReducer = (state = [], action) => {
         case DETAIL_TODO: {
             return state.map((todo) => {
                 if (todo.id === action.id) {
-                    return {
+                    let newTodo = {
                         ...todo,
                         details: action.text
                     }
+                    console.log('action.text', action.text);
+                    TodoModel.update(newTodo, () => {
+                        //todo.completed = true;
+                        //console.log('todo', todo);
+                    })
+                    return newTodo
                 } else {
                     return todo;
                 }
-
             })
         }
         default:

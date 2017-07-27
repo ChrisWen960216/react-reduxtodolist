@@ -117,9 +117,9 @@ export const TodoModel = {
     update({id, text, completed, deleted} , successFn, errorFn) {
         // 文档 https://leancloud.cn/docs/leanstorage_guide-js.html#更新对象
         let todo = AV.Object.createWithoutData('Todo', id)
-        text !== undefined && todo.set('text', text)
-        completed !== undefined && todo.set('completed', completed)
-        deleted !== undefined && todo.set('deleted', deleted)
+        text = todo.set('text', text)
+        completed = todo.set('completed', completed)
+        deleted = todo.set('deleted', deleted)
         // 为什么我要像上面那样写代码？
         // 考虑如下场景
         // update({id:1, text:'hi'})
@@ -131,16 +131,14 @@ export const TodoModel = {
         // update({id:1, text: '', completed: null}}
         // 用户想将 text 和 completed 置空，我们要满足
         todo.save().then((response) => {
-            successFn && successFn.call(null)
+            successFn && successFn.call(console.log('成功', todo))
         }, (error) => errorFn && errorFn.call(null, error))
     },
     destroy(todoId, successFn, errorFn) {
         // 文档 https://leancloud.cn/docs/leanstorage_guide-js.html#删除对象
-        let todo = AV.Object.createWithoutData('Todo', todoId)
-        todo.destroy().then(function(response) {
-            successFn && successFn.call(null)
-        }, function(error) {
-            errorFn && errorFn.call(null, error)
-        });
+        TodoModel.update({
+            id: todoId,
+            deleted: true
+        }, successFn, errorFn)
     }
 }
