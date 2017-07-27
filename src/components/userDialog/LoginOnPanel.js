@@ -18,8 +18,7 @@ class LoginOn extends Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.props.userLoginOn(values);
-
-            //this.props.closeDialog();
+                this.props.closeDialog();
             }
         });
     }

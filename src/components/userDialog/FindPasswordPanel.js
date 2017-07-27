@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
+import { sendPasswordResetEmail } from '../../api/leanCloud.js';
 const FormItem = Form.Item;
 
 
@@ -13,7 +14,14 @@ class FindPassWord extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                let {email} = values;
+                let success = () => {
+                    message.success('邮件已经成功发送！请在邮箱重置密码。')
+                }
+                let error = () => {
+                    message.error('网络故障！请稍后重试！')
+                }
+                sendPasswordResetEmail(email, success, error);
             }
         });
     }

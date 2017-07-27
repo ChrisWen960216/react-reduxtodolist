@@ -125,7 +125,7 @@ function selectTodos(todos, filter) {
 
 //将对应的redux state 转换成组件的 props 以供使用 mapStateToProps
 function mapStateToProps(state) {
-    console.log('state', state);
+    //console.log('state', state);
     return {
         todos: selectTodos(state.todos, state.filters),
         filters: state.filters
