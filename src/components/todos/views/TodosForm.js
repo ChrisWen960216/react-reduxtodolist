@@ -36,7 +36,7 @@ export default class TodosForm extends Component {
     // 遍历 todos 并进行展示，同时过滤掉已经删除的事件
     render() {
         let todoList = this.props.todo.filter((item) => !item.deleted).map((item, index) => (
-            <li key={ item.key }>
+            <li key={ index }>
               <Card className='todo-card'>
                 <TodoItem todo={ item } onToggle={ this.onToggle } onDelete={ this.onDelete } onAddDetails={ this.onAddDetails } changeDate={ this.changeDate }
                   changeDetails={ this.changeDetails } />

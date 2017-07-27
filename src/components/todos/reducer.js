@@ -1,8 +1,9 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, DETAIL_TODO } from './actionType.js';
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, DETAIL_TODO, READ_TODO } from './actionType.js';
 import { SET_VISIBILITY_FILTER } from '../filters/actionTypes.js';
-import { VisibilityFilters } from '../filters/constants.js'
+import { VisibilityFilters } from '../filters/constants.js';
 
-let nextTodoId = 0;
+
+//let nextTodoId = 0;
 const {SHOW_ALL} = VisibilityFilters;
 
 /* state.todos={
@@ -19,20 +20,22 @@ const {SHOW_ALL} = VisibilityFilters;
  * @param {state.todos} state 
  * @param {actionType} action 
  */
+
 export const TodoReducer = (state = [], action) => {
     switch (action.type) {
+        case READ_TODO: {
+            let initTodo = action.array;
+            return [...initTodo, ...state];
+        }
         case ADD_TODO: {
-            return [
-                {
-                    id: nextTodoId++,
-                    text: action.text,
-                    details: '',
-                    date: '',
-                    completed: false,
-                    deleted: false
-                },
-                ...state
-            ]
+            let newTodo = {
+                text: action.text,
+                details: '',
+                date: '',
+                completed: false,
+                deleted: false
+            }
+            return ([newTodo, ...state])
         }
         case TOGGLE_TODO: {
             return state.map((todo) => {
@@ -64,7 +67,6 @@ export const TodoReducer = (state = [], action) => {
                     return {
                         ...todo,
                         details: action.text
-
                     }
                 } else {
                     return todo;

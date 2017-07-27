@@ -16,7 +16,8 @@ import Filters from '../../filters/views/filter.js';
 import { VisibilityFilters } from '../../filters/constants.js';
 import { setVisibilityFilter } from '../../filters/action.js';
 import { connect } from 'react-redux';
-import { addTodo, toggleTodo, deleteTodo, detailTodo } from '../action.js';
+import { addTodo, toggleTodo, deleteTodo, detailTodo, readTodo } from '../action.js';
+import { getCurrentUser, TodoModel } from '../../../api/leanCloud.js';
 
 import '../../../style/main.scss';
 
@@ -26,8 +27,10 @@ class TodoComponents extends Component {
         this.state = {
             momentValue: '',
             momentDetails: '',
-            momentDate: ''
+            momentDate: '',
+            momentUser: ''
         }
+        this.readUser();
         this.onToggle = this.onToggle.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onPress = this.onPress.bind(this);
@@ -36,6 +39,16 @@ class TodoComponents extends Component {
         this.onAddDetails = this.onAddDetails.bind(this);
         this.changeDetails = this.changeDetails.bind(this);
     }
+
+    readUser() {
+        let user = getCurrentUser();
+        if (user) {
+            TodoModel.getByUser(user, (todos) => {
+                this.props.readTodo(todos);
+            })
+        }
+    }
+
 
     onToggle(e, todo) {
         let id = todo.id;
@@ -52,6 +65,7 @@ class TodoComponents extends Component {
             if (e.target.value === '') {
                 alert('不能为空！')
             } else {
+
                 this.props.addTodo(e.target.value);
                 e.target.value = '';
                 this.setState({
@@ -94,6 +108,7 @@ class TodoComponents extends Component {
     }
 
     render() {
+        //this.loadMomentUser()
         const {filters} = this.props
         return (
             <div>
@@ -125,7 +140,6 @@ function selectTodos(todos, filter) {
 
 //将对应的redux state 转换成组件的 props 以供使用 mapStateToProps
 function mapStateToProps(state) {
-    //console.log('state', state);
     return {
         todos: selectTodos(state.todos, state.filters),
         filters: state.filters
@@ -139,7 +153,8 @@ function mapDispatchToProps(dispatch) {
         toggleTodo: (id) => dispatch(toggleTodo(id)),
         deleteTodo: (id) => dispatch(deleteTodo(id)),
         detailTodo: (id, text) => dispatch(detailTodo(id, text)),
-        onFilterChange: (nextFilter) => dispatch(setVisibilityFilter(nextFilter))
+        onFilterChange: (nextFilter) => dispatch(setVisibilityFilter(nextFilter)),
+        readTodo: (array) => dispatch(readTodo(array))
     }
 }
 

@@ -22,6 +22,7 @@ export default class MainApp extends Component {
         this.localUser = this.state.localUser.username;
     }
 
+
     userLoginOn(values) {
         let {userName, passWord, email} = values;
         let success = (user) => {
@@ -70,7 +71,7 @@ export default class MainApp extends Component {
             <div id='main-app'>
               { selectPanel }
               <HeaderComponents/>
-              <TodoComponents/>
+              <TodoComponents />
             </div>
 
         )

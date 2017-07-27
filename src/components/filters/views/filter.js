@@ -11,13 +11,11 @@ export default class Filters extends Component {
                     </Button>);
         }
         return (
-            <Button type='dashed' className='filter-button'>
-              <p onClick={ e => {
-                               e.preventDefault();
-                               this.props.onFilterChange(filter);
-                           } }>
-                { name }
-              </p>
+            <Button type='dashed' className='filter-button' onClick={ e => {
+                                                              e.preventDefault();
+                                                              this.props.onFilterChange(filter);
+                                                          } }>
+              { name }
             </Button>
 
         )

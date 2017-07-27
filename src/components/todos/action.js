@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, DETAIL_TODO } from './actionType.js';
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, DETAIL_TODO, READ_TODO } from './actionType.js';
 
 
 
@@ -22,3 +22,9 @@ export const detailTodo = (id, text) => ({
     id,
     text
 })
+
+export const readTodo = (array) => ({
+    type: READ_TODO,
+    array
+})
+
