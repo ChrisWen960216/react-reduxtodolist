@@ -114,12 +114,13 @@ export const TodoModel = {
         });
 
     },
-    update({id, text, completed, deleted} , successFn, errorFn) {
+    update({id, text, completed, deleted, details} , successFn, errorFn) {
         // 文档 https://leancloud.cn/docs/leanstorage_guide-js.html#更新对象
         let todo = AV.Object.createWithoutData('Todo', id)
         text = todo.set('text', text)
         completed = todo.set('completed', completed)
         deleted = todo.set('deleted', deleted)
+        details = todo.set('details', details)
         // 为什么我要像上面那样写代码？
         // 考虑如下场景
         // update({id:1, text:'hi'})

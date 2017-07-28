@@ -29,20 +29,20 @@ class LoginIn extends Component {
                 { getFieldDecorator('userName', {
                       rules: [{
                           required: true,
-                          message: 'Please input your username!'
+                          message: '请输入你的用户名'
                       }],
                   })(
-                      <Input prefix={ <Icon type="user" style={ { fontSize: 13 } } /> } placeholder="Username" />
+                      <Input prefix={ <Icon type="user" style={ { fontSize: 13 } } /> } placeholder="请输入用户名" />
                   ) }
               </FormItem>
               <FormItem>
                 { getFieldDecorator('passWord', {
                       rules: [{
                           required: true,
-                          message: 'Please input your Password!'
+                          message: '请输入你的密码'
                       }],
                   })(
-                      <Input prefix={ <Icon type="lock" style={ { fontSize: 13 } } /> } type="password" placeholder="Password" />
+                      <Input prefix={ <Icon type="lock" style={ { fontSize: 13 } } /> } type="password" placeholder="请输入密码" />
                   ) }
               </FormItem>
               <FormItem>
