@@ -34,11 +34,10 @@ export default class UserCenter extends Component {
                 </Col>
                 <Modal title='软件说明' visible={ this.state.visibile } onCancel={ this.showModal } footer={ null }>
                   <span className='user-intro'>
-                                                                                                                                      <h2>React-redux TodoList Created By ChrisWen</h2>
-                                                                                                                                       <h2>Version:2.0</h2>
-                                                                                                                                      <h3>V1.0的彻底重构版，加入大量新的功能，使用了新的技术栈和UI界面，这个APP将作为我的一个作品放在个人（未来的）网站上</h3>
-                                                                                                                                      <h3>感谢 师父刘夏 的鼎力支持</h3>
-                                                                                                                                    </span>
+                                                                                                                                                                          <h2>React-redux TodoList Created By ChrisWen</h2>
+                                                                                                                                                                           <h2>Version:2.0</h2>
+                                                                                                                                                                          <h3>V1.0的彻底重构版，加入大量新的功能，使用了新的技术栈和UI界面</h3>
+                                                                                                                                                                        </span>
                 </Modal>
               </Row>
             </div>

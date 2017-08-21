@@ -11,13 +11,14 @@ import React, { Component } from 'react';
 import InputForm from './InputForm.js';
 import TodosForm from './TodosForm.js';
 import Filters from '../../filters/views/filter.js';
-//import UserDialog from '../../userDialog/index.js';
 
+//import UserDialog from '../../userDialog/index.js';
+//import { getCurrentUser, TodoModel } from '../../../api/leanCloud.js';
 import { VisibilityFilters } from '../../filters/constants.js';
 import { setVisibilityFilter } from '../../filters/action.js';
 import { connect } from 'react-redux';
 import { addTodo, toggleTodo, deleteTodo, detailTodo, readTodo } from '../action.js';
-import { getCurrentUser, TodoModel } from '../../../api/leanCloud.js';
+
 
 import '../../../style/main.scss';
 
@@ -30,7 +31,6 @@ class TodoComponents extends Component {
             momentDate: '',
             momentUser: ''
         }
-        this.readUser();
         this.onToggle = this.onToggle.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onPress = this.onPress.bind(this);
@@ -38,15 +38,12 @@ class TodoComponents extends Component {
         this.onClick = this.onClick.bind(this);
         this.onAddDetails = this.onAddDetails.bind(this);
         this.changeDetails = this.changeDetails.bind(this);
-    }
 
-    readUser() {
-        let user = getCurrentUser();
-        if (user) {
-            TodoModel.getByUser(user, (todos) => {
-                this.props.readTodo(todos);
+        fetch('http://localhost:3000/api/chriswens').then(res => {
+            res.json().then(resJson => {
+                console.log('resJson', resJson.map(item => console.log(item.name)));
             })
-        }
+        })
     }
 
 
@@ -99,7 +96,26 @@ class TodoComponents extends Component {
         if (this.state.momentValue === '') {
             alert('不被接受的数据！')
         } else {
-            this.props.addTodo(this.state.momentValue);
+            //let number = this.state.momentValue;
+            //this.props.addTodo(this.state.momentValue);
+            // fetch(`http://localhost:3000/api/chriswens/${number}`).then(res => {
+            //     res.json().then(resJson => {
+            //         console.log(resJson);
+            //         this.props.addTodo(resJson.name)
+            //     })
+            // })
+            let name = this.state.momentValue;
+            let initRequest = {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: `{"name": ${name},"age": 18,"address": "ShangHai Sansi"}`
+            };
+            let myRequest = new Request('http://localhost:3000/api/chriswens', initRequest);
+            fetch(myRequest);
+
         }
         this.setState({
             momentValue: ''
@@ -107,7 +123,6 @@ class TodoComponents extends Component {
     }
 
     render() {
-        //this.loadMomentUser()
         const {filters} = this.props
         return (
             <div>

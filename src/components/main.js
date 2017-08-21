@@ -7,14 +7,15 @@ import HeaderComponents from '../components/header/HeaderComponent.js';
 import UserDialog from './userDialog/index.js';
 import UserCenter from './userCenter/index.js';
 
-import { getCurrentUser, signUp, signIn, signOut } from '../api/leanCloud.js';
+//import { getCurrentUser, signUp, signIn, signOut } from '../api/leanCloud.js';
 import { message } from 'antd';
 
 export default class MainApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            localUser: getCurrentUser() || ''
+            //localUser: getCurrentUser() || ''
+            localUser: ''
         }
         this.userLoginOn = this.userLoginOn.bind(this);
         this.userLoginIn = this.userLoginIn.bind(this);
@@ -36,7 +37,7 @@ export default class MainApp extends Component {
             message.error('网络错误！请稍后重试')
             console.log('error', error);
         }
-        signUp(userName, passWord, email, success, error);
+    // signUp(userName, passWord, email, success, error);
     }
 
     userLoginIn(values) {
@@ -53,11 +54,11 @@ export default class MainApp extends Component {
             message.error('网络错误！请稍后重试')
             console.log('error', error);
         }
-        signIn(userName, passWord, success, error)
+    //signIn(userName, passWord, success, error)
     }
 
     quitLogIn() {
-        signOut();
+        //signOut();
         this.setState({
             localUser: ''
         })
@@ -68,14 +69,15 @@ export default class MainApp extends Component {
     render() {
         const selectPanel = this.state.localUser ?
             <div>
-              <UserCenter userMark={ this.localUser } quitLogIn={ this.quitLogIn } />
-              <HeaderComponents/>
+              { /*<UserCenter userMark={ this.localUser } quitLogIn={ this.quitLogIn } />*/ }
+              { /*<HeaderComponents/>*/ }
               <TodoComponents />
             </div> :
-            <UserDialog userLoginOn={ this.userLoginOn } userLoginIn={ this.userLoginIn } />
+            { /*<UserDialog userLoginOn={ this.userLoginOn } userLoginIn={ this.userLoginIn } />*/ }
         return (
             <div id='main-app'>
-              { selectPanel }
+              { /* selectPanel */ }
+              <TodoComponents />
             </div>
 
         )

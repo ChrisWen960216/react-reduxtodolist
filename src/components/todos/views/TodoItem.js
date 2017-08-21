@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Checkbox } from 'antd';
+
 import TodoDetail from './details/TodoDetail.js';
 
 export default class TodoItem extends Component {
