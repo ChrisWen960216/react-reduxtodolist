@@ -1,7 +1,6 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, DETAIL_TODO, READ_TODO } from './actionType.js';
 import { SET_VISIBILITY_FILTER } from '../filters/actionTypes.js';
 import { VisibilityFilters } from '../filters/constants.js';
-//import { TodoModel } from '../../api/leanCloud.js';
 
 import { message } from 'antd';
 
@@ -25,23 +24,16 @@ const {SHOW_ALL} = VisibilityFilters;
 
 export const TodoReducer = (state = [], action) => {
     switch (action.type) {
-        case READ_TODO: {
-            let initTodo = action.array;
-            return [...initTodo, ...state];
-        }
         case ADD_TODO: {
             let newTodo = {
-                text: action.text,
+                id: action.id,
+                text: action.title,
                 details: '',
                 date: '',
                 completed: false,
                 deleted: false
             }
-            // TodoModel.create(newTodo, (id) => {
-            //     newTodo.id = id;
-            // }, (success) => {
-            //     message.success('云端同步更新成功!')
-            // })
+            // console.log('newTodo:', action);
             return ([newTodo, ...state])
         }
         case TOGGLE_TODO: {
@@ -51,10 +43,6 @@ export const TodoReducer = (state = [], action) => {
                         ...todo,
                         completed: !todo.completed
                     }
-                    // TodoModel.update(newTodo, () => {
-                    //     //todo.completed = true;
-                    //     //console.log('todo', todo);
-                    // })
                     return newTodo
                 } else {
                     return todo
@@ -64,8 +52,6 @@ export const TodoReducer = (state = [], action) => {
         case DELETE_TODO: {
             return state.map((todo) => {
                 if (todo.id === action.id) {
-                    // TodoModel.destroy(todo.id, () => {
-                    // })
                     return {
                         ...todo,
                         deleted: true
@@ -82,11 +68,6 @@ export const TodoReducer = (state = [], action) => {
                         ...todo,
                         details: action.text
                     }
-                    console.log('action.text', action.text);
-                    // TodoModel.update(newTodo, () => {
-                    //     //todo.completed = true;
-                    //     //console.log('todo', todo);
-                    // })
                     return newTodo
                 } else {
                     return todo;

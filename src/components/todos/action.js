@@ -2,9 +2,10 @@ import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, DETAIL_TODO, READ_TODO } from './ac
 
 
 
-export const addTodo = (text) => ({
+export const addTodo = (title, id) => ({
     type: ADD_TODO,
-    text
+    title,
+    id
 })
 
 export const toggleTodo = (id) => ({

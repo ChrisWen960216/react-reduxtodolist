@@ -67,16 +67,19 @@ export default class MainApp extends Component {
 
     componentWillUpdate() {}
     render() {
-        const selectPanel = this.state.localUser ?
-            <div>
-              { /*<UserCenter userMark={ this.localUser } quitLogIn={ this.quitLogIn } />*/ }
-              { /*<HeaderComponents/>*/ }
-              <TodoComponents />
-            </div> :
-            { /*<UserDialog userLoginOn={ this.userLoginOn } userLoginIn={ this.userLoginIn } />*/ }
+        {
+            /* const selectPanel = this.state.localUser ?
+                        <div>
+                          <UserCenter userMark={ this.localUser } quitLogIn={ this.quitLogIn } />
+                          <HeaderComponents/>
+                          <TodoComponents />
+                        </div> :
+                        <UserDialog userLoginOn={ this.userLoginOn } userLoginIn={ this.userLoginIn } />*/
+        }
         return (
             <div id='main-app'>
               { /* selectPanel */ }
+              <HeaderComponents/>
               <TodoComponents />
             </div>
 

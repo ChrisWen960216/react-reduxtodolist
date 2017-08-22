@@ -13,12 +13,11 @@ import TodosForm from './TodosForm.js';
 import Filters from '../../filters/views/filter.js';
 
 //import UserDialog from '../../userDialog/index.js';
-//import { getCurrentUser, TodoModel } from '../../../api/leanCloud.js';
 import { VisibilityFilters } from '../../filters/constants.js';
 import { setVisibilityFilter } from '../../filters/action.js';
 import { connect } from 'react-redux';
-import { addTodo, toggleTodo, deleteTodo, detailTodo, readTodo } from '../action.js';
-
+import { addTodo, toggleTodo, deleteTodo, detailTodo } from '../action.js';
+import { URL } from '../../../api/url.js';
 
 import '../../../style/main.scss';
 
@@ -39,9 +38,9 @@ class TodoComponents extends Component {
         this.onAddDetails = this.onAddDetails.bind(this);
         this.changeDetails = this.changeDetails.bind(this);
 
-        fetch('http://localhost:3000/api/chriswens').then(res => {
+        fetch(URL).then(res => {
             res.json().then(resJson => {
-                console.log('resJson', resJson.map(item => console.log(item.name)));
+                resJson.map(item => this.props.addTodo(item.title, item.id));
             })
         })
     }
@@ -50,6 +49,16 @@ class TodoComponents extends Component {
     onToggle(e, todo) {
         let id = todo.id;
         this.props.toggleTodo(id);
+        let initRequest = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: `{"completed":"true"}`
+        };
+        let myRequest = new Request(URL, initRequest)
+        fetch(myRequest).then(res => console.log(res))
     }
 
     onDelete(e, todo) {
@@ -96,34 +105,26 @@ class TodoComponents extends Component {
         if (this.state.momentValue === '') {
             alert('不被接受的数据！')
         } else {
-            //let number = this.state.momentValue;
-            //this.props.addTodo(this.state.momentValue);
-            // fetch(`http://localhost:3000/api/chriswens/${number}`).then(res => {
-            //     res.json().then(resJson => {
-            //         console.log(resJson);
-            //         this.props.addTodo(resJson.name)
-            //     })
-            // })
-            let name = this.state.momentValue;
             let initRequest = {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json',
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: `{"name": ${name},"age": 18,"address": "ShangHai Sansi"}`
+                body: `{"title":"${this.state.momentValue}","completed":"false","deleted":"false"}`
             };
-            let myRequest = new Request('http://localhost:3000/api/chriswens', initRequest);
+            let myRequest = new Request(URL, initRequest);
             fetch(myRequest);
-
+            this.props.addTodo(this.state.momentValue);
+            this.setState({
+                momentValue: ''
+            });
         }
-        this.setState({
-            momentValue: ''
-        })
+
     }
 
     render() {
-        const {filters} = this.props
+        const {filters} = this.props;
         return (
             <div>
               <InputForm className='input-form' onPress={ this.onPress } onClick={ this.onClick } onChange={ this.onChange } />
@@ -163,12 +164,12 @@ function mapStateToProps(state) {
 //分发事件，让 reducer 进行对应的事件处理 mapDispatchToProps
 function mapDispatchToProps(dispatch) {
     return {
-        addTodo: (text) => dispatch(addTodo(text)),
+        addTodo: (title, id) => dispatch(addTodo(title, id)),
         toggleTodo: (id) => dispatch(toggleTodo(id)),
         deleteTodo: (id) => dispatch(deleteTodo(id)),
         detailTodo: (id, text) => dispatch(detailTodo(id, text)),
-        onFilterChange: (nextFilter) => dispatch(setVisibilityFilter(nextFilter)),
-        readTodo: (array) => dispatch(readTodo(array))
+        onFilterChange: (nextFilter) => dispatch(setVisibilityFilter(nextFilter))
+    // readTodo: (array) => dispatch(readTodo(array))
     }
 }
 
