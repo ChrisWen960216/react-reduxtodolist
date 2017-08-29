@@ -18,7 +18,7 @@ import { setVisibilityFilter } from '../../filters/action.js';
 import { connect } from 'react-redux';
 import { addTodo, toggleTodo, deleteTodo, detailTodo } from '../action.js';
 import { URL } from '../../../api/url.js';
-//import { sendNetRequest } from '../../../api/request.js';
+import { sendNetRequest } from '../../../api/request.js';
 
 import '../../../style/main.scss';
 
@@ -30,7 +30,7 @@ class TodoComponents extends Component {
             momentDetails: '',
             momentDate: '',
             momentUser: ''
-        }
+        };
         this.onToggle = this.onToggle.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onPress = this.onPress.bind(this);
@@ -41,32 +41,29 @@ class TodoComponents extends Component {
 
         fetch(URL).then(res => {
             res.json().then(resJson => {
-                resJson.map(item => this.props.addTodo(item.title, item.id));
+                resJson.map(item => {
+                    if (item.deleted === false) {
+                        this.props.addTodo(item.title, item.id)
+                    }
+                });
             })
         })
     }
 
 
     onToggle(e, todo) {
-        // let type = 'PATCH';
-        // let id = todo.id;
-        // let arg = `{"id":${todo.id},"completed":"true"}`;
-        // this.props.toggleTodo(id);
-        // sendNetRequest(type, id, arg);
+        let type = 'PATCH';
+        let id = todo.id;
+        let arg = `{"id":${todo.id},"completed":"true"}`;
+        this.props.toggleTodo(id);
+        sendNetRequest(type, id, arg);
     }
 
     onDelete(e, todo) {
+        let type = 'PATCH';
         let id = todo.id;
-        let initRequest = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: `{"id":${id},"deleted":"true"}`
-        };
-        let myRequest = new Request(`${URL}/${id}`, initRequest);
-        fetch(myRequest);
+        let arg = `{"id":${id},"deleted":"true"}`;
+        sendNetRequest(type, id, arg);
         this.props.deleteTodo(id);
     }
 
@@ -85,8 +82,11 @@ class TodoComponents extends Component {
     }
 
     onAddDetails(e, todo) {
+        let type = 'PATCH';
         let id = todo.id;
         let detail = this.state.momentDetails;
+        let arg = `{"id":${id},"detail":"${detail}"}`;
+        sendNetRequest(type, id, arg);
         this.props.detailTodo(id, detail);
     }
 
@@ -109,16 +109,11 @@ class TodoComponents extends Component {
         if (this.state.momentValue === '') {
             alert('不被接受的数据！')
         } else {
-            let initRequest = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: `{"title":"${this.state.momentValue}","completed":"false","deleted":"false"}`
-            };
-            let myRequest = new Request(URL, initRequest);
-            fetch(myRequest);
+            let type = 'POST';
+            let id = null;
+            let title = this.state.momentValue;
+            let arg = `{"title":"${title}","completed":"false","deleted":"false","detail":""}`;
+            sendNetRequest(type, id, arg);
             this.props.addTodo(this.state.momentValue);
             this.setState({
                 momentValue: ''

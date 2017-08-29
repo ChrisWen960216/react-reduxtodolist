@@ -14,7 +14,9 @@ export default class TodosForm extends Component {
         this.changeDate = this.changeDate.bind(this);
     }
 
-    onToggle(e, item) { this.props.onToggle(e, item)} 
+    onToggle(e, item) {
+        this.props.onToggle(e, item)
+    }
 
     onDelete(e, item) {
         this.props.onDelete(e, item)

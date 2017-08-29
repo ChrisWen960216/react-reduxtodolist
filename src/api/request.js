@@ -9,7 +9,8 @@ export const sendNetRequest = (type, id, arg) => {
         },
         body: arg
     };
-    let myRequest = new Request(`${URL}/${id}`, initRequest);
+    let ID = (id !== null ? id : '');
+    let myRequest = new Request(`${URL}/${ID}`, initRequest);
     fetch(myRequest);
 }
 
