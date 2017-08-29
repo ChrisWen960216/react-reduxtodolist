@@ -14,9 +14,7 @@ export default class TodosForm extends Component {
         this.changeDate = this.changeDate.bind(this);
     }
 
-    onToggle(e, item) {
-        this.props.onToggle(e, item)
-    }
+    onToggle(e, item) { this.props.onToggle(e, item)} 
 
     onDelete(e, item) {
         this.props.onDelete(e, item)
@@ -29,7 +27,6 @@ export default class TodosForm extends Component {
     changeDetails(e, item) {
         this.props.changeDetails(e, item)
     }
-
     changeDate(e, item) {
         this.props.changeDate(e, item)
     }
@@ -41,7 +38,7 @@ export default class TodosForm extends Component {
               <li key={ index }>
                 <Card className='todo-card'>
                   <TodoItem todo={ item } onToggle={ this.onToggle } onDelete={ this.onDelete } onAddDetails={ this.onAddDetails } changeDate={ this.changeDate }
-                    changeDetails={ this.changeDetails } />
+                    changeDetails={ this.changeDetails } completed={ this.props.completed } />
                 </Card>
               </li>
             </TransitionGroup>

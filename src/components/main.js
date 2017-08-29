@@ -31,13 +31,11 @@ export default class MainApp extends Component {
                 localUser: userName
             });
             message.success('欢迎您！' + userName);
-        //console.log(this.state.localUser);
         }
         let error = (error) => {
             message.error('网络错误！请稍后重试')
             console.log('error', error);
         }
-    // signUp(userName, passWord, email, success, error);
     }
 
     userLoginIn(values) {

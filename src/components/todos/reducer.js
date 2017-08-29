@@ -33,7 +33,6 @@ export const TodoReducer = (state = [], action) => {
                 completed: false,
                 deleted: false
             }
-            // console.log('newTodo:', action);
             return ([newTodo, ...state])
         }
         case TOGGLE_TODO: {

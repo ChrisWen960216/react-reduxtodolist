@@ -3,9 +3,9 @@
  */
 
 /* <InputForm/> 输入框组件，用户进行输入，获得输入值。子组件，通过 props 传递数据/函数。
-*  <TodosForm/> 展示组件，展示系统中的 todos.需要注意的是，并不是直接获取 state.todos，而是经过Filters组件过滤之后的 todos。
-*  <Filters/> 过滤器组件，处理对应的 todos,经过处理的 todos 再交由 <TodosForm/> 组件进行展示。
-*/
+ *  <TodosForm/> 展示组件，展示系统中的 todos.需要注意的是，并不是直接获取 state.todos，而是经过Filters组件过滤之后的 todos。
+ *  <Filters/> 过滤器组件，处理对应的 todos,经过处理的 todos 再交由 <TodosForm/> 组件进行展示。
+ */
 
 import React, { Component } from 'react';
 import InputForm from './InputForm.js';
@@ -18,6 +18,7 @@ import { setVisibilityFilter } from '../../filters/action.js';
 import { connect } from 'react-redux';
 import { addTodo, toggleTodo, deleteTodo, detailTodo } from '../action.js';
 import { URL } from '../../../api/url.js';
+//import { sendNetRequest } from '../../../api/request.js';
 
 import '../../../style/main.scss';
 
@@ -47,22 +48,25 @@ class TodoComponents extends Component {
 
 
     onToggle(e, todo) {
-        let id = todo.id;
-        this.props.toggleTodo(id);
-        let initRequest = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: `{"completed":"true"}`
-        };
-        let myRequest = new Request(URL, initRequest)
-        fetch(myRequest).then(res => console.log(res))
+        // let type = 'PATCH';
+        // let id = todo.id;
+        // let arg = `{"id":${todo.id},"completed":"true"}`;
+        // this.props.toggleTodo(id);
+        // sendNetRequest(type, id, arg);
     }
 
     onDelete(e, todo) {
         let id = todo.id;
+        let initRequest = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: `{"id":${id},"deleted":"true"}`
+        };
+        let myRequest = new Request(`${URL}/${id}`, initRequest);
+        fetch(myRequest);
         this.props.deleteTodo(id);
     }
 
@@ -93,8 +97,8 @@ class TodoComponents extends Component {
     }
 
     /* 挂载 onChange 事件，极力避免操作 Dom 元素。
-    *  onChange 将 Input 中的值存入本地 Component 的 State 中 再经由 onClick 事件进行提交
-    */
+     *  onChange 将 Input 中的值存入本地 Component 的 State 中 再经由 onClick 事件进行提交
+     */
     onChange(e) {
         this.setState({
             momentValue: e.target.value
@@ -125,13 +129,12 @@ class TodoComponents extends Component {
 
     render() {
         const {filters} = this.props;
-        return (
-            <div>
-              <InputForm className='input-form' onPress={ this.onPress } onClick={ this.onClick } onChange={ this.onChange } />
-              <Filters filter={ filters } onFilterChange={ this.props.onFilterChange } />
-              <TodosForm todo={ this.props.todos } onToggle={ this.onToggle } onDelete={ this.onDelete } onAddDetails={ this.onAddDetails } changeDetails={ this.changeDetails }
-              />
-            </div>
+        return ( <div>
+                   < InputForm className='input-form' onPress={ this.onPress } onClick={ this.onClick } onChange={ this.onChange } />
+                   < Filters filter={ filters } onFilterChange={ this.props.onFilterChange } />
+                   < TodosForm todo={ this.props.todos } onToggle={ this.onToggle } onDelete={ this.onDelete } onAddDetails={ this.onAddDetails } changeDetails={ this.changeDetails }
+                   />
+                 </div>
         )
     }
 }

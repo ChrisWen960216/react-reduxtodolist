@@ -28,6 +28,8 @@
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "leancloud-storage": "^3.0.2",
+    "lodash.assign": "^4.2.0",
+    "lodash.clonedeep": "^4.5.0",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.0.0",
     "postcss-loader": "2.0.6",
@@ -98,6 +100,9 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.2.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.2.0",
     "node-sass": "^4.5.3",
     "redux-devtools": "^3.4.0",
     "redux-devtools-dock-monitor": "^1.1.2",
@@ -105,5 +110,4 @@
     "sass-loader": "^6.0.6"
   },
   "homepage": "http://chriswen960216.github.io/reduxtodolist/build"
-
 }
